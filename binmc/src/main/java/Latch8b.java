@@ -34,7 +34,7 @@ public class Latch8b{
   }
   
   void display(){
-    System.out.println(""+dq7+dq6+dq5+dq4+dq3+dq2+dq1+dq0);
+    System.out.println("L8b -> "+dq7+dq6+dq5+dq4+dq3+dq2+dq1+dq0);
   }
   
   // testing //

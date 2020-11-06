@@ -1,5 +1,5 @@
 public class DFlipFlop{
-  boolean clk,d,q; // d->DI, q->DO
+  boolean clk,d,q; // d->DI, q->DO, clk->w
 
   public DFlipFlop() {
     clk=d=q=false;
@@ -26,7 +26,7 @@ public class DFlipFlop{
   }
   
   void display(){
-    System.out.printf("[%s]\n",q?"1":"0");
+    System.out.printf("[%s\n]",this);
   }
   
   public String toString(){
@@ -51,10 +51,6 @@ public class DFlipFlop{
   // testing //
   public static void main(String[] args){
     DFlipFlop d1=new DFlipFlop();
-    //d1.truth();
-    d1.w(0);
-    d1.display();
-    d1.w(1);
-    d1.display();
+    d1.truth();
   }
 }
