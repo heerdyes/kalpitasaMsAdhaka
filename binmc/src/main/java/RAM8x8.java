@@ -58,8 +58,8 @@ public class RAM8x8{
   }
   
   void display(){
-    System.out.println("RAM8x8");
-    System.out.println("------------");
+    //System.out.println("RAM8x8");
+    //System.out.println("------------");
     System.out.println("| "+(r7.dq0.q?"1":"0")+(r6.dq0.q?"1":"0")+(r5.dq0.q?"1":"0")+(r4.dq0.q?"1":"0")+(r3.dq0.q?"1":"0")+(r2.dq0.q?"1":"0")+(r1.dq0.q?"1":"0")+(r0.dq0.q?"1":"0")+" |");
     System.out.println("| "+(r7.dq1.q?"1":"0")+(r6.dq1.q?"1":"0")+(r5.dq1.q?"1":"0")+(r4.dq1.q?"1":"0")+(r3.dq1.q?"1":"0")+(r2.dq1.q?"1":"0")+(r1.dq1.q?"1":"0")+(r0.dq1.q?"1":"0")+" |");
     System.out.println("| "+(r7.dq2.q?"1":"0")+(r6.dq2.q?"1":"0")+(r5.dq2.q?"1":"0")+(r4.dq2.q?"1":"0")+(r3.dq2.q?"1":"0")+(r2.dq2.q?"1":"0")+(r1.dq2.q?"1":"0")+(r0.dq2.q?"1":"0")+" |");
@@ -68,7 +68,7 @@ public class RAM8x8{
     System.out.println("| "+(r7.dq5.q?"1":"0")+(r6.dq5.q?"1":"0")+(r5.dq5.q?"1":"0")+(r4.dq5.q?"1":"0")+(r3.dq5.q?"1":"0")+(r2.dq5.q?"1":"0")+(r1.dq5.q?"1":"0")+(r0.dq5.q?"1":"0")+" |");
     System.out.println("| "+(r7.dq6.q?"1":"0")+(r6.dq6.q?"1":"0")+(r5.dq6.q?"1":"0")+(r4.dq6.q?"1":"0")+(r3.dq6.q?"1":"0")+(r2.dq6.q?"1":"0")+(r1.dq6.q?"1":"0")+(r0.dq6.q?"1":"0")+" |");
     System.out.println("| "+(r7.dq7.q?"1":"0")+(r6.dq7.q?"1":"0")+(r5.dq7.q?"1":"0")+(r4.dq7.q?"1":"0")+(r3.dq7.q?"1":"0")+(r2.dq7.q?"1":"0")+(r1.dq7.q?"1":"0")+(r0.dq7.q?"1":"0")+" |");
-    System.out.println("------------");
+    //System.out.println("------------");
   }
   
   public static void main(String[] args){

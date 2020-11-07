@@ -18,8 +18,8 @@ public class RAM16x1{
     this.a3=a3;this.a2=a2;this.a1=a1;this.a0=a0;
     this.din=di;this.w=w;
     dec.feed(a3,di);
-    r0.feed(a2,a1,a0,w&dec.o0,dec.o0);
-    r1.feed(a2,a1,a0,w&dec.o1,dec.o1);
+    r0.feed(a2,a1,a0,w&!a3,dec.o0);
+    r1.feed(a2,a1,a0,w&a3,dec.o1);
     sel.feed(a3,r1.dout,r0.dout);
     dout=sel.q;
   }
