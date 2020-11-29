@@ -33,10 +33,10 @@ public class RAM16x1{
   }
   
   void display(){
-    System.out.println("-----");
+    //System.out.println("-----");
     r0.display();
     r1.display();
-    System.out.println("-----");
+    //System.out.println("-----");
   }
   
   public static void main(String[] args){

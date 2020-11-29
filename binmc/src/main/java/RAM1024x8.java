@@ -103,12 +103,12 @@ public class RAM1024x8{
   }
   
   void display(){
-    System.out.println("------------");
+    //System.out.println("------------");
     r0.display();
     r1.display();
     r2.display();
     r3.display();
-    System.out.println("------------");
+    //System.out.println("------------");
   }
   
   public static void main(String[] args){

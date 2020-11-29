@@ -29,8 +29,8 @@ public class RAM8x2{
   }
   
   void display(){
-    System.out.println("RAM8x2");
-    System.out.println("------");
+    //System.out.println("RAM8x2");
+    //System.out.println("------");
     System.out.println("| "+(r1.dq0.q?"1":"0")+(r0.dq0.q?"1":"0")+" |");
     System.out.println("| "+(r1.dq1.q?"1":"0")+(r0.dq1.q?"1":"0")+" |");
     System.out.println("| "+(r1.dq2.q?"1":"0")+(r0.dq2.q?"1":"0")+" |");
@@ -39,7 +39,7 @@ public class RAM8x2{
     System.out.println("| "+(r1.dq5.q?"1":"0")+(r0.dq5.q?"1":"0")+" |");
     System.out.println("| "+(r1.dq6.q?"1":"0")+(r0.dq6.q?"1":"0")+" |");
     System.out.println("| "+(r1.dq7.q?"1":"0")+(r0.dq7.q?"1":"0")+" |");
-    System.out.println("------");
+    //System.out.println("------");
   }
   
   public static void main(String[] args){
