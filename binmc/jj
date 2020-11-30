@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+echo "creating deploy directory..."
+mkdir -p deploy
+pushd bin
+echo "building jar..."
+jar cf ../deploy/binmc_v0.1.jar *.class
+popd
+
