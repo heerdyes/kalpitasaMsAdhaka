@@ -73,14 +73,14 @@ public class RAM1024x8{
     r2.feed(a7,a6,a5,a4,a3,a2,a1,a0,wd.o2,d7.o2,d6.o2,d5.o2,d4.o2,d3.o2,d2.o2,d1.o2,d0.o2);
     r3.feed(a7,a6,a5,a4,a3,a2,a1,a0,wd.o3,d7.o3,d6.o3,d5.o3,d4.o3,d3.o3,d2.o3,d1.o3,d0.o3);
     // selection
-    s7.feed(a9,a8,r0.do7,r1.do7,r2.do7,r3.do7);
-    s6.feed(a9,a8,r0.do6,r1.do6,r2.do6,r3.do6);
-    s5.feed(a9,a8,r0.do5,r1.do5,r2.do5,r3.do5);
-    s4.feed(a9,a8,r0.do4,r1.do4,r2.do4,r3.do4);
-    s3.feed(a9,a8,r0.do3,r1.do3,r2.do3,r3.do3);
-    s2.feed(a9,a8,r0.do2,r1.do2,r2.do2,r3.do2);
-    s1.feed(a9,a8,r0.do1,r1.do1,r2.do1,r3.do1);
-    s0.feed(a9,a8,r0.do0,r1.do0,r2.do0,r3.do0);
+    s7.feed(a9,a8,r3.do7,r2.do7,r1.do7,r0.do7);
+    s6.feed(a9,a8,r3.do6,r2.do6,r1.do6,r0.do6);
+    s5.feed(a9,a8,r3.do5,r2.do5,r1.do5,r0.do5);
+    s4.feed(a9,a8,r3.do4,r2.do4,r1.do4,r0.do4);
+    s3.feed(a9,a8,r3.do3,r2.do3,r1.do3,r0.do3);
+    s2.feed(a9,a8,r3.do2,r2.do2,r1.do2,r0.do2);
+    s1.feed(a9,a8,r3.do1,r2.do1,r1.do1,r0.do1);
+    s0.feed(a9,a8,r3.do0,r2.do0,r1.do0,r0.do0);
     do7=s7.q;
     do6=s6.q;
     do5=s5.q;

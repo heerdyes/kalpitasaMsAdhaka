@@ -6,7 +6,7 @@ public class RAM16x8{
   Decoder1to2 wd;
   Decoder1to2 d7,d6,d5,d4,d3,d2,d1,d0;
   Selector2to1 s7,s6,s5,s4,s3,s2,s1,s0;
-  RAM8x8 r0,r1;
+  RAM8x8 r1,r0;
   
   RAM16x8(){
     r0=new RAM8x8();
@@ -42,6 +42,17 @@ public class RAM16x8{
     d0.display();
   }
   
+  void displaySelectorStage(){
+    s7.display();
+    s6.display();
+    s5.display();
+    s4.display();
+    s3.display();
+    s2.display();
+    s1.display();
+    s0.display();
+  }
+  
   void feed(boolean a3,boolean a2,boolean a1,boolean a0,
             boolean w,
             boolean di7,boolean di6,boolean di5,boolean di4,boolean di3,boolean di2,boolean di1,boolean di0){
@@ -67,14 +78,15 @@ public class RAM16x8{
     //displayDecoderStage();
     r0.feed(a2,a1,a0,wd.o0,d7.o0,d6.o0,d5.o0,d4.o0,d3.o0,d2.o0,d1.o0,d0.o0);
     r1.feed(a2,a1,a0,wd.o1,d7.o1,d6.o1,d5.o1,d4.o1,d3.o1,d2.o1,d1.o1,d0.o1);
-    s7.feed(a3,r0.do7,r1.do7);
-    s6.feed(a3,r0.do6,r1.do6);
-    s5.feed(a3,r0.do5,r1.do5);
-    s4.feed(a3,r0.do4,r1.do4);
-    s3.feed(a3,r0.do3,r1.do3);
-    s2.feed(a3,r0.do2,r1.do2);
-    s1.feed(a3,r0.do1,r1.do1);
-    s0.feed(a3,r0.do0,r1.do0);
+    s7.feed(a3,r1.do7,r0.do7);
+    s6.feed(a3,r1.do6,r0.do6);
+    s5.feed(a3,r1.do5,r0.do5);
+    s4.feed(a3,r1.do4,r0.do4);
+    s3.feed(a3,r1.do3,r0.do3);
+    s2.feed(a3,r1.do2,r0.do2);
+    s1.feed(a3,r1.do1,r0.do1);
+    s0.feed(a3,r1.do0,r0.do0);
+    //displaySelectorStage();
     do7=s7.q;
     do6=s6.q;
     do5=s5.q;

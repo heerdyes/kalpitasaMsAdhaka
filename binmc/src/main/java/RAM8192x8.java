@@ -82,14 +82,14 @@ public class RAM8192x8{
     r6.feed(a9,a8,a7,a6,a5,a4,a3,a2,a1,a0,wd.o6,d7.o6,d6.o6,d5.o6,d4.o6,d3.o6,d2.o6,d1.o6,d0.o6);
     r7.feed(a9,a8,a7,a6,a5,a4,a3,a2,a1,a0,wd.o7,d7.o7,d6.o7,d5.o7,d4.o7,d3.o7,d2.o7,d1.o7,d0.o7);
     // selection
-    s7.feed(a12,a11,a10,r0.do7,r1.do7,r2.do7,r3.do7,r4.do7,r5.do7,r6.do7,r7.do7);
-    s6.feed(a12,a11,a10,r0.do6,r1.do6,r2.do6,r3.do6,r4.do6,r5.do6,r6.do6,r7.do6);
-    s5.feed(a12,a11,a10,r0.do5,r1.do5,r2.do5,r3.do5,r4.do5,r5.do5,r6.do5,r7.do5);
-    s4.feed(a12,a11,a10,r0.do4,r1.do4,r2.do4,r3.do4,r4.do4,r5.do4,r6.do4,r7.do4);
-    s3.feed(a12,a11,a10,r0.do3,r1.do3,r2.do3,r3.do3,r4.do3,r5.do3,r6.do3,r7.do3);
-    s2.feed(a12,a11,a10,r0.do2,r1.do2,r2.do2,r3.do2,r4.do2,r5.do2,r6.do2,r7.do2);
-    s1.feed(a12,a11,a10,r0.do1,r1.do1,r2.do1,r3.do1,r4.do1,r5.do1,r6.do1,r7.do1);
-    s0.feed(a12,a11,a10,r0.do0,r1.do0,r2.do0,r3.do0,r4.do0,r5.do0,r6.do0,r7.do0);
+    s7.feed(a12,a11,a10,r7.do7,r6.do7,r5.do7,r4.do7,r3.do7,r2.do7,r1.do7,r0.do7);
+    s6.feed(a12,a11,a10,r7.do6,r6.do6,r5.do6,r4.do6,r3.do6,r2.do6,r1.do6,r0.do6);
+    s5.feed(a12,a11,a10,r7.do5,r6.do5,r5.do5,r4.do5,r3.do5,r2.do5,r1.do5,r0.do5);
+    s4.feed(a12,a11,a10,r7.do4,r6.do4,r5.do4,r4.do4,r3.do4,r2.do4,r1.do4,r0.do4);
+    s3.feed(a12,a11,a10,r7.do3,r6.do3,r5.do3,r4.do3,r3.do3,r2.do3,r1.do3,r0.do3);
+    s2.feed(a12,a11,a10,r7.do2,r6.do2,r5.do2,r4.do2,r3.do2,r2.do2,r1.do2,r0.do2);
+    s1.feed(a12,a11,a10,r7.do1,r6.do1,r5.do1,r4.do1,r3.do1,r2.do1,r1.do1,r0.do1);
+    s0.feed(a12,a11,a10,r7.do0,r6.do0,r5.do0,r4.do0,r3.do0,r2.do0,r1.do0,r0.do0);
     do7=s7.q;
     do6=s6.q;
     do5=s5.q;

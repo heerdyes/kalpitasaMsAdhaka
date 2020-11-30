@@ -47,6 +47,10 @@ public class RAM8x8{
     do7=r7.dout;
   }
   
+  void printDO(){
+    System.out.println("RAM8x8.DO-> "+(do7?"1":"0")+(do6?"1":"0")+(do5?"1":"0")+(do4?"1":"0")+(do3?"1":"0")+(do2?"1":"0")+(do1?"1":"0")+(do0?"1":"0"));
+  }
+  
   void feed(String addr,String w,String di){
     if(addr.length()!=3 || w.length()!=1 || di.length()!=8){
       throw new RuntimeException("illegal feed in data!");
