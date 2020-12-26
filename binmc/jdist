@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+# flow
+./jj
+echo "removing ~/L/GH/heerdyes/raspi-art/sketches/binmc_00/code/binmc_v0.1.jar ..."
+rm ~/L/GH/heerdyes/raspi-art/sketches/binmc_00/code/binmc_v0.1.jar
+echo "copying jar to ~/L/GH/heerdyes/raspi-art/sketches/binmc_00/code ..."
+cp deploy/binmc_v0.1.jar ~/L/GH/heerdyes/raspi-art/sketches/binmc_00/code

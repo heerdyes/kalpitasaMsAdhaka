@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+IFS=$'\n\t'
+# flow
+echo "catting all java files into .pde ..."
+cat src/main/java/*.java >deploy/binmc_lib.pde
+echo "copying generated .pde into sketch directory..."
+cp deploy/binmc_lib.pde ~/L/GH/heerdyes/raspi-art/sketches/binmc_00
+
