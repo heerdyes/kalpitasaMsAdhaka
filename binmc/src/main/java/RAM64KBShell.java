@@ -1,5 +1,11 @@
 import java.io.*;
 
+class ParameterException extends RuntimeException{
+  public ParameterException(String msg){
+    super(msg);
+  }
+}
+
 public class RAM64KBShell implements ControlPanel{
   RAM65536x8 ram;
   BufferedReader br;
@@ -22,35 +28,55 @@ public class RAM64KBShell implements ControlPanel{
           +(ram.do3?"1":"0")+(ram.do2?"1":"0")+(ram.do1?"1":"0")+(ram.do0?"1":"0");
   }
   
-  void repl() {
+  void memrd(String addr){
+    try{
+      feeddata(addr,"0","00000000");
+      System.out.println(collectdata());
+    }catch(Exception e){
+      System.err.println(e.getMessage());
+    }
+  }
+  
+  void memwr(String addr,String dat){
+    try{
+      feeddata(addr,"1",dat);
+      System.out.println(collectdata());
+    }catch(Exception e){
+      System.err.println(e.getMessage());
+    }
+  }
+  
+  void chkargs(String cmd,int n,int k){
+    if(n!=k){
+      String fmtmsg=String.format("[SYNTAX_ERROR] %s requires %d arguments, %d provided!",cmd,k,n);
+      throw new ParameterException(fmtmsg);
+    }
+  }
+  
+  void repl(){
     try{
       for(;;){
         System.out.print("[RAM_64KB]> ");
         String instr=br.readLine();
         String[] parts=instr.split(" ");
         String cmd=parts[0];
-        if(cmd.equalsIgnoreCase("exit") || cmd.equalsIgnoreCase("quit") || cmd.equalsIgnoreCase("x") || cmd.equalsIgnoreCase("q")){
-          break;
-        }
-        if(cmd.equalsIgnoreCase("r")){
-          String addr=parts[1];
-          try{
-            feeddata(addr,"0","00000000");
-            System.out.println(collectdata());
-          }catch(Exception e){
-            System.err.println(e.getMessage());
+        int pn=parts.length;
+        try{
+          if(cmd.equalsIgnoreCase("exit") || cmd.equalsIgnoreCase("quit") || cmd.equalsIgnoreCase("x") || cmd.equalsIgnoreCase("q")){
+            break;
           }
-        }else if(cmd.equalsIgnoreCase("w")){
-          String addr=parts[1];
-          String dat=parts[2];
-          try{
-            feeddata(addr,"1",dat);
-            System.out.println(collectdata());
-          }catch(Exception e){
-            System.err.println(e.getMessage());
+          if(cmd.equalsIgnoreCase("r")){
+            chkargs("r",pn,2);
+            memrd(parts[1]);
+          }else if(cmd.equalsIgnoreCase("w")){
+            chkargs("w",pn,3);
+            memwr(parts[1],parts[2]);
+          }else{
+            System.out.println("[ERR] unknown command!");
           }
-        }else{
-          System.out.println("[ERR] unknown command!");
+        }catch(ParameterException pe){
+          System.out.println(pe.getMessage());
+          continue;
         }
       }
     }catch(IOException ioe){
