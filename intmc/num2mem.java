@@ -2,6 +2,7 @@ import java.io.*;
 public class num2mem {
   public static void main(String[] args) throws Exception {
     if (args.length != 2) {
+      System.out.println("usage: java num2mem <file.num> <file.mem>");
       throw new Exception("[FATAL] command line args not properly specified!");
     }
     System.out.println("num2mem!");
@@ -11,6 +12,15 @@ public class num2mem {
       throw new Exception("[FATAL] numfile does not exist whereas memfile exists.");
     }
     translate_num2mem(new File(args[0]), new File(args[1]));
+  }
+  
+  static String pre_process(String ln){
+    int pos=ln.indexOf("#");
+    String rs=ln;
+    if(pos!=-1){
+      rs=ln.substring(0,pos);
+    }
+    return snip_spaces(rs);
   }
 
   static void translate_num2mem(File numfile, File memfile) throws Exception {
@@ -32,8 +42,8 @@ public class num2mem {
     for (; ; i++) {
       line = br.readLine();
       if(line == null) break;
-      // first snip spaces in the line
-      line = snip_spaces(line);
+      // pre-process the line
+      line = pre_process(line);
       // now split
       String[] parts = line.split(":");
       int location = Integer.parseInt(parts[0]);

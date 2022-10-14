@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.logging.*;
 
 // fixme: this is a monolithic piece of code
 public class intmc {
@@ -18,26 +17,45 @@ public class intmc {
   static volatile boolean PCUF = false;    // PC updated flag
   static volatile boolean halted = false;
   static String logFileName = "intmc.log";
-  static Logger d = Logger.getLogger(intmc.class.getSimpleName());
+  static PrintWriter d;
+  
+  static void err(String msg){
+    System.err.println("----------------");
+    System.err.println("[ERROR] "+msg);
+    System.err.println("----------------");
+  }
+  
+  static void info(String msg){
+    if(d==null){
+      System.err.println("log file not initialized! writing to console");
+      System.out.println("[INFO] "+msg);
+      return;
+    }
+    d.println("[INFO] "+msg);
+    d.flush();
+  }
+  
+  static void initlogging(){
+    try {
+      d = new PrintWriter(new FileOutputStream(new File(logFileName)));
+    } catch(IOException ioe) {
+      err(ioe.getMessage());
+    }
+    if(d==null) {
+      err("filehandler not initialized. logging might not work!");
+    }
+  }
+  
+  static void endlogging(){
+    if(d!=null){
+      d.close();
+      d=null;
+    }
+  }
 
   public static void main(String[] args) throws Exception {
-    // init logging file
-    d.setUseParentHandlers(false);
-    FileHandler fh = null;
-    try {
-      fh = new FileHandler(logFileName);
-      d.addHandler(fh);
-    } catch(SecurityException se) {
-      se.printStackTrace();
-    } catch(IOException ioe) {
-      ioe.printStackTrace();
-    }
-    if(fh==null) {
-      System.err.println("filehandler not initialized. logging might not work!");
-    }
-
-    // flow
-    d.info("load memory from serialized array.");
+    initlogging();
+    info("load memory from serialized array.");
     if(args.length != 1) {
       throw new Exception("[FATAL] no memfile specified as argument.");
     }
@@ -45,13 +63,14 @@ public class intmc {
     File memfileimg = new File(memfile.getName() + "dmp");
     if (memfile.exists()) {
       load_memory(memfile);
-      d.info("memfile loaded.");
-      d.info("going to start machine.");
+      info("memfile loaded.");
+      info("going to start machine.");
       run_machine();
       dump_memory(memfileimg);
     } else {
       bye("FATAL: memfile does not exist.");
     }
+    endlogging();
   }
 
   // to be used inside switch case for instructions that alter PC
@@ -60,8 +79,9 @@ public class intmc {
     PCUF = true;
   }
 
-  static void bye(String exc) throws Exception {
-    throw new Exception(exc);
+  static void bye(String exc) {
+    endlogging();
+    throw new RuntimeException(exc);
   }
 
   static void run_machine() throws IOException, Exception {
@@ -87,139 +107,139 @@ public class intmc {
   static void process() throws IOException, Exception {
     switch(INST) {
       case 0:
-        d.info("EXIT");
+        info("EXIT");
         halted = true;
         break;
       case 10:
-        d.info("LOAD");
+        info("LOAD");
         AC = DATA;
         break;
       case 11:
-        d.info("LOADX");
+        info("LOADX");
         AC = memory[DATA];
         break;
       case 12:
-        d.info("AC <- DR");
+        info("AC <- DR");
         AC = DR;
         break;
       case 13:
-        d.info("AC <- LR");
+        info("AC <- LR");
         AC = LR;
         break;
       case 20:
-        d.info("STORE");
+        info("STORE");
         memory[DATA] = AC;
         break;
       case 21:
-        d.info("ISTOREX");
+        info("ISTOREX");
         memory[LR] = AC;
         break;
       case 22:
-        d.info("ISTOREDR");
+        info("ISTOREDR");
         memory[LR] = DR;
         break;
       case 23:
-        d.info("DR <- AC");
+        info("DR <- AC");
         DR = AC;
         break;
       case 24:
-        d.info("LR <- AC");
+        info("LR <- AC");
         LR = AC;
         break;
       case 30:
-        d.info("ADD");
+        info("ADD");
         AC = AC + DATA;
         break;
       case 31:
-        d.info("ADDX");
+        info("ADDX");
         AC = AC + memory[DATA];
         break;
       case 33:
-        d.info("INC");
+        info("INC");
         AC++;
         break;
       case 34:
-        d.info("INCX");
+        info("INCX");
         memory[DATA]++;
         break;
       case 40:
-        d.info("SUB");
+        info("SUB");
         AC = AC - DATA;
         break;
       case 41:
-        d.info("SUBI");
+        info("SUBI");
         AC = AC - memory[DATA];
         break;
       case 42:
-        d.info("CMP");
+        info("CMP");
         ZFLAG = AC - DATA;
         break;
       case 43:
-        d.info("CMPX");
+        info("CMPX");
         ZFLAG = AC - memory[DATA];
         break;
       case 44:
-        d.info("DEC");
+        info("DEC");
         AC--;
         break;
       case 45:
-        d.info("DECX");
+        info("DECX");
         memory[DATA]--;
         break;
       case 50:
-        d.info("MUL");
+        info("MUL");
         AC = AC * DATA;
         break;
       case 51:
-        d.info("MULX");
+        info("MULX");
         AC = AC * memory[DATA];
         break;
       case 60:
-        d.info("DIV");
+        info("DIV");
         AC = AC / DATA;
         break;
       case 61:
-        d.info("DIVX");
+        info("DIVX");
         AC = AC / memory[DATA];
         break;
       case 70:
-        d.info("MOD");
+        info("MOD");
         AC = AC % DATA;
         break;
       case 71:
-        d.info("MODX");
+        info("MODX");
         AC = AC % memory[DATA];
         break;
       case 9:
-        d.info("GOTO");
+        info("GOTO");
         setPC(DATA);
         break;
       case 91:
-        d.info("JZ");
+        info("JZ");
         if(ZFLAG == 0) {
           setPC(DATA);
         }
         break;
       case 92:
-        d.info("JNZ");
+        info("JNZ");
         if(ZFLAG != 0) {
           setPC(DATA);
         }
         break;
       case 93:
-        d.info("JACZ");
+        info("JACZ");
         if(AC == 0) {
           setPC(DATA);
         }
         break;
       case 94:
-        d.info("JACNZ");
+        info("JACNZ");
         if(AC != 0) {
           setPC(DATA);
         }
         break;
       case 80:
-        d.info("DISPREG");
+        info("DISPREG");
         System.out.println(",------------------------");
         System.out.println("|  AC = " + AC);
         System.out.println("|  PC = " + PC);
@@ -231,15 +251,15 @@ public class intmc {
         System.out.println("`------------------------");
         break;
       case 81:
-        d.info("PRINT");
+        info("PRINT");
         System.out.println("["+DATA+"]: "+memory[DATA]);
         break;
       case 82:
-        d.info("PRINTAC");
+        info("PRINTAC");
         System.out.println("[AC]: "+AC);
         break;
       default:
-        d.info("NULL");
+        info("NULL");
         break;
     }
   }
@@ -255,7 +275,7 @@ public class intmc {
 
   // fixme: memory warrants the need to be a separate object
   static void load_memory(File file) throws Exception {
-    d.info("load_memory: loading memory from serialized array file.");
+    info("load_memory: loading memory from serialized array file.");
     ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
     memory = (int[]) ois.readObject();
     ois.close();
@@ -271,7 +291,7 @@ public class intmc {
   }
   
   static void dump_memory(File file) throws Exception {
-    d.info("dump_memory: serializing memory into array file.");
+    info("dump_memory: serializing memory into array file.");
     ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file));
     oos.writeObject(memory);
     oos.close();
